@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<!DOCTYPE html>
+    <head>
+    <meta name="description" content="math.js | basic usage">
+  <title>math.js | basic usage</title>
+  <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+<title>Experiments</title>
+<link rel="stylesheet" type="text/css" href="/style.css" title="style">
+
+<html>
+    <head>
+        <body>
+            <h1>BLOCKED ROTOR TEST OF INDUCTION MOTOR</h1>
+                <p>
+                  In the locked rotor experiment of a 3 phase induction motor, the aim is to calculate the equivalent circuit parameters (Re-Xe-Ze) of the motor. In the locked rotor experiment, a brake system of the motor shaft is locked and its rotation is prevented. In this way, the equivalent circuit of the motor will be the same as the short circuit test of the transformer. Therefore, this experiment is also called the short circuit test.
+                       
+                      </p>
+                      <p>
+                        In the locked rotor test, after the rotor is locked, no voltage is supplied from the network. Instead, a tuned voltage source is used. The voltage applied to the motor is controlled from the ammeter starting from zero and gradually increased. After the current value reaches the rated value, the voltage increase is stopped. The rated values ​​of the motor are reached by making use of the label values ​​on it.   
+                     </p>
+                     <p>
+                        Since the motor shaft is locked, applying too much voltage will damage the motor. In addition, the long duration of the experiment also damages the engine. Therefore, the experiment must be completed quickly and the voltage must be cut off.
+                     </p>
+                     <p>
+
+                     </p>
+                     <p>
+                     The symbols are,</p>
+                     <p>Vɸ= input voltage per Phase</p>
+                        <p>R1,X1= resistance and leakage reactance of the stator per phase</p>
+                           <p>R2,X2= resistance and leakage reactance of the rotor per phase</p>
+                              
+
+                                 <p>I1, I2 =stator and rotor currents (referred to stator) per phase.</p>
+                </p>
+                <p>
+                slip (s) = 1 (rotor not rotating)
+                </p>
+                <p>
+                [rated current value is equal to 3.7 ampere]
+                </p>
+                <p>
+                     Re=P/(3*I1*I2)    </p>                                     
+                <p>  (I1=I2) </p>
+                <p>  Ze=V/(√3*I1)</p>
+                <p>  Xe=√Ze^2-Re^2</p>
+                 <p> X1=X2=Xe/2 </p>
+                 <p>  R2=Re-R1   (R1 is obtained from induction motor dc experiment)
+                </p>
+
+        </body>
+    </head>
+    <script>
+        function calculateTorqueFromPower() {
+            var Va = math.evaluate(document.forms[0].enterVoltage.value);
+            var t = math.sqrt(-1);
+            var d = math.sqrt(-1);
+            var R1 = 4.8;
+            var R2 = 7.009;
+            var X1 = 4.796; 
+            var X2 = 4.796;
+
+            var Vl = Va/ math.sqrt(3) ;    // Line to neutral input voltage
+            var zfl =math.add(R2,math.add(R1,(math.add(math.multiply(d, X1), math.multiply(d, X2)))));
+            var I2 = math.divide(Vl,math.abs(zfl));                  
+            var pin = 3*I2*I2*(R1+R2);
+            var pf = math.divide(pin,math.multiply(I2,math.multiply(Va,math.sqrt(3))));
+            document.forms[0].I2.value=(I2).toFixed(2);//Electromechanical torque
+            document.forms[0].pin.value=(pin).toFixed(2);
+
+            math.evaluate(document.forms[0].pf.value=(pf));
+        }
+
+
+    </script>
+</head>
+
+
+
+<head>
+      <style>
+         .box {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+         }
+         .box img {
+            width: 300%;
+            height: auto;
+         }
+         .box .enterVoltage {
+            position: absolute;
+            top: 35%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+         }
+         
+      </style>
+   </head>
+   <body>
+      <div class = "box">
+         <img src = "https://www.electrical4u.com/images/february16/1456567879.gif" alt = "Current Affairs">
+         
+         <form>
+         <input class = "enterVoltage" style="width:70px" placeholder="Voltage" value="" type="number" name=enterVoltage>
+         <input type=button value="Calculate" onclick="calculateTorqueFromPower()">
+         <input type="reset" value="Reset"><br><br>
+
+         <input disabled type=text value="current" name=I2 size=10 readonly=true>
+         <input disabled type=text value="power" name=pin size=10 readonly=true> 
+         <input disabled type=text value="power factor" name=pf size=10 readonly=true> 
+         <br><br><br><br><br><br>
+         </form>
+      </div>
+   </body>
+{% endblock  %}

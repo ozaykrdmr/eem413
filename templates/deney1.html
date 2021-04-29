@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<!DOCTYPE html>
+    <head>
+        <meta name="description" content="math.js | basic usage">
+        <title>math.js | basic usage</title>
+        <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+        <title>Experiments</title>
+        <link rel="stylesheet" type="text/css" href="/style.css" title="style">
+        <style>
+            .box {
+                position: relative;
+                width: 100%;
+                max-width: 250px;
+            }
+            .box img {
+                width: 400%;
+                height: auto;
+            }
+            .box .enterVoltage {
+                position: absolute;
+                top: 38%;
+                left: 0%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterPole {
+                position: absolute;
+                top: 30%;
+                left: 450%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterRpm {
+                position: absolute;
+                top: 40%;
+                left: 450%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterR1 {
+                position: absolute;
+                top: 0%;
+                left: 76%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterR2 {
+                position: absolute;
+                top: 0%;
+                left: 230%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterX1 {
+                position: absolute;
+                top: 0%;
+                left: 140%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterX2 {
+                position: absolute;
+                top: 0%;
+                left: 295%;
+                transform: translate(-50%, -50%);
+            }
+            .box .enterXm {
+                position: absolute;
+                top: 38%;
+                left: 260%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>No Load Test of an Induction Motor</h1>
+        <p>
+            -  No Load Test is an indirect method used for determining the efficiency and also to determine the circuit parameters of the equivalent circuit of the three-phase induction motors. 
+        </p>
+        <p>
+            -  The open circuit test performed on the transformer.
+        <p>
+            -  No load test is same as the open circuit test performed on the transformer
+        </p> 
+        - In this method the motor is uncoupled from its load and the rated voltage at the rated frequency is applied to the stator to run the motor without the load. 
+        </p>
+        <p>
+            - With the help of the two wattmeters the input power of the motor is measured. The circuit diagram of the No load test is shown below.
+        </p>
+        <br/> <img src="nn.png"/>
+        <p>
+            An ammeter measures the no-load current, and a voltmeter gives the normal rated supply voltage. The I<sup>2</sup>R losses on the primary side is neglected as they vary with the square of the current as we know that the no load current is 20-30% of the full load current,
+        </p>
+        <p>
+            As the motor is running at no load, the total input power is equal to the constant iron loss, friction and windage losses of the motor.
+        </p>
+        <p>
+            P<small>constant</small> = P <small>i</small> = P <small>1</small> + P <small>2</small> = sum of the two wattmeter readings
+        </p>
+        <p>
+            generally less than 0.5, thus the Wattmeter reading of one of the Wattmeter will show the negative reading. Therefore, it is necessary to reverse the direction of the current coil terminals to take the readings.
+        </p>
+        <p>
+            In the case of the transformer, no load test the constant R<small>0</small> and X<small>0</small> can be calculated from the readings of the test.
+        </p>
+    
+        <p>
+            If,
+        </p>
+        <p>
+            <li>
+                V<small>in</small>l is the input line voltage,
+            </li>
+            <li>
+                P<small>in</small>l is the total three-phase input power at the no load,
+            </li>
+            <li>
+                I<small>0</small> is the input line current,
+            </li>
+            <li>
+                V<small>ip</small> is the input phase voltage
+            </li>
+        </p>
+        <p>
+            Therefore,
+        </p>
+        <p>
+            <li>
+                P<small>in1</small> = √3 * V<small>in1</small> * I<small>0</small> * cosφ<small>0</small>
+            </li>
+            <li>
+                I<small>μ</small> = I <small>0</small> * sinφ<small>0</small>
+            </li>
+            <li>
+                I<small>ω</small> = I <small>0</small> * cosφ<small>0</small>
+            </li>
+            <li>
+                R<small>0</small> = V<small>ip</small> / I<small>ω</small>
+            </li>
+            <li>
+                X<small>0</small> = V<small>ip</small> / I<small>μ</small>
+            </li>
+        </p>
+        <p>
+            SEPERATION OF LOSSES
+        </p>
+        <p>
+            Friction and windage loss can be separated from the no-load loss P<small>0</small>. At no load various readings of the No load loss are taken at the different stator applied voltages. The readings are taken from rated to the breakdown value at rated frequency.
+        </p>
+        <P>
+            A curve plotted between P<small>0</small> and V is shown below.
+        </P>
+        <br/> <img src="sp.PNG"/>
+        <p>
+            The curve is almost parabolic at the normal voltage. As the iron losses are almost proportional to the square of the flux density and therefore, the applied voltage. The curve is extended to the left to cut the vertical axis at the point A. At the vertical axis V = 0 and hence the intercept OA represents the independent voltage loss. This means the friction and the windage losses are separated from the total no load loss.
+            <br><br><br><br><br>
+        </p>
+
+        <div class = "box">
+            <img src = "https://riverglennapts.com/images/basic-induction-motor/equivalent-circuit-for-an-induction-motor_2.png" alt = "Current Affairs">
+            
+            <form>
+                <input class = "enterVoltage" style="width:70px" placeholder="Voltage" value="" type="number" name=enterVoltage> 
+                <input class = "enterPole" style="width:70px" placeholder="Pole"  value="" type="number" name=enterPole>
+                <input class = "enterRpm" style="width:70px" placeholder="Rpm"  value="" type="number" name=enterRpm>
+                <input class = "enterR1" style="width:50px" placeholder="R1"  value="" type="number" name=enterR1>
+                <input class = "enterR2" style="width:50px" placeholder="R2"  value="" type="number" name=enterR2>
+                <input class = "enterX1" style="width:50px" placeholder="X1"  value="" type="number" name=enterX1>
+                <input class = "enterX2" style="width:50px" placeholder="X2"  value="" type="number" name=enterX2>
+                <input class = "enterXm" style="width:50px" placeholder="Xm"  value="" type="number" name=enterXm>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Power</th>
+                            <th scope="col">Input current</th>
+                            <th scope="col">Tmech</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type=button value="Calculate" onclick="calculateTorqueFromPower()">
+                                <br>
+                                <br>
+                                <input type="reset" value="Reset">
+                            </td>
+                            <td><input disabled type=text value="power" id=pshaft size=10 readonly=true></td>
+                            <td><input disabled type=text value="Input current" id=inputCurrent size=10 readonly=true></td>
+                            <td><input disabled type=text value="tmech" id=tmech size=10 readonly=true></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </body>
+    <script>
+        function calculateTorqueFromPower() {
+            var Va    = math.evaluate(document.forms[0].enterVoltage.value);
+            var poles = math.evaluate(document.forms[0].enterPole.value);
+            var rpm   = math.evaluate(document.forms[0].enterRpm.value);
+            var R1    = math.evaluate(document.forms[0].enterR1.value);
+            var R2    = math.evaluate(document.forms[0].enterR2.value);
+            var X1    = math.evaluate(document.forms[0].enterX1.value);
+            var X2    = math.evaluate(document.forms[0].enterX2.value);
+            var Xm    = math.evaluate(document.forms[0].enterXm.value);
+            var d     = math.sqrt(-1)
+            var nph   = 3;
+            var prot  = 354;
+            var pi    = 3.14;
+            
+            //Here is the operating condition
+            
+            var V1 = Va/ math.sqrt(3) ;    // Line to neutral input voltage
+            var fe = 60;  // Frequency value
+            
+
+            // Calculate the synchronous speed
+            var ns     = math.divide(math.multiply(120,fe),poles);
+            var omegas = math.divide(math.multiply(4,(math.multiply(pi,fe))),poles);
+            var slip   = (ns-rpm)/ns;
+            var omegam = omegas*(1-slip);
+            var x      = math.add(Xm,pi);
+            var Zgap   = math.divide(math.multiply(d,math.multiply(Xm,math.add(math.multiply(d,X2),math.divide(R2,slip)))),math.add(math.divide(R2,slip),(math.multiply(d,math.add(Xm,X2))))); 
+            var Zin    = math.add((math.multiply(d,X1)) , (math.add(R1,Zgap)));
+            var I1     = math.divide(V1,Zin); // input current
+
+            var I2     = math.divide( math.multiply(I1,math.multiply(d,Xm)),math.add(math.divide(R2,slip),(math.multiply(d,math.add(Xm,X2)))));
+            var tmech  = math.divide(math.multiply(R2,math.multiply(math.abs(I2),math.multiply(nph,math.abs(I2)))),math.multiply(slip,omegas));
+            var pmech  = math.multiply(omegam,tmech);  //Electromechanical input power 
+            
+            $("#pshaft").val(math.add(pmech,-prot).toFixed(2));
+            $("#tmech").val((tmech*1).toFixed(2) + " N.m");//Electromechanical torque
+            $("#inputCurrent").val(parseInt(I1).toFixed(2) + " I");
+        }
+    </script>
+</html>
+{% endblock  %}

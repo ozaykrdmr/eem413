@@ -1,0 +1,178 @@
+
+<html>
+<head>
+  <meta name="description" content="math.js | basic usage">
+  <title>math.js | basic usage</title>
+  <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+<title>Experiments</title>
+<link rel="stylesheet" type="text/css" href="/style.css" title="style">
+<script>
+
+function calculateTorqueFromPower() {
+ 
+  var Va = math.evaluate(document.forms[0].enterVoltage.value);
+  var poles = math.evaluate(document.forms[0].enterPole.value);
+  var rpm = math.evaluate(document.forms[0].enterRpm.value);
+  var R1 = 0.262;
+  var R2 = 0.447;
+  var X1 = 0.633;
+  var X2 = 1.47;
+  var Xm = 21.2;
+  var d = math.sqrt(-1)
+  var nph = 3;
+  var prot = 354;
+  var pi = 3.14;
+  
+
+  
+	
+
+ //Here is the operating condition
+   
+  var V1 = Va/ math.sqrt(3) ;    // Line to neutral input voltage
+  var fe = 60;  // Frequency value
+  
+
+  // Calculate the synchronous speed
+  var ns = math.divide(math.multiply(120,fe),poles);
+  var omegas = math.divide(math.multiply(4,(math.multiply(pi,fe))),poles);
+  
+  var slip = (ns-rpm)/ns;
+  
+  var omegam = omegas*(1-slip);
+  var x = math.add(Xm,pi)
+  var Zgap = math.divide(math.multiply(d,math.multiply(Xm,math.add(math.multiply(d,X2),math.divide(R2,slip)))),math.add(math.divide(R2,slip),(math.multiply(d,math.add(Xm,X2))))); 
+  var Zin=math.add((math.multiply(d,X1)) , (math.add(R1,Zgap)));
+  var I1=math.divide(V1,Zin); // input current
+
+  var I2= math.divide( math.multiply(I1,math.multiply(d,Xm)),math.add(math.divide(R2,slip),(math.multiply(d,math.add(Xm,X2)))));
+  var tmech=math.divide(math.multiply(R2,math.multiply(math.abs(I2),math.multiply(nph,math.abs(I2)))),math.multiply(slip,omegas));
+  var pmech=math.multiply(omegam,tmech);  //Electromechanical input power 
+ 
+  
+ 
+
+  
+	 
+  
+  document.forms[0].tmech.value=(tmech*1).toFixed(2);//Electromechanical torque
+  document.forms[0].pshaft.value=math.add(pmech,-prot).toFixed(2);
+  math.evaluate(document.forms[0].inputCurrent.value=(I1));
+  
+}
+
+
+
+
+
+</script>
+</head>
+
+
+
+<body bgcolor=#23345346>
+
+
+<table align=center border=0 bgcolor=#FFFFFFf width=500 height=100% cellspacing=0 cellpadding=1>
+ <tr>
+  <td colspan=2 height=75>
+
+  </td>
+ </tr>
+ <tr>
+  <td valign=top width=130>
+
+  </td>
+  <td valign=top width=640>
+
+
+<!-- Begin body text -->
+
+<p class=head>
+ASYNCHRONOUS MACHINE -NO LOAD TEST
+</p>
+
+
+
+
+<form>
+
+<table border=0 bgcolor=#FFFFFF width=300 cellspacing=0 cellpadding=0>
+<tr><td>
+<table border=0 width=300 cellspacing=0 cellpadding=0>
+<tr>
+ <td align=left valign=top><img border=0 height=12 src=/images/topleft.gif width=10></td>
+ <td align=center class=bar>Calculation</td>
+ <td align=right valign=top><img border=0 height=12 src=/images/topright.gif width=10></td>
+</tr>
+</table>
+<table border=1 bordercolor=#33456 rules=none bgcolor=#FF65FF width=300 cellspacing=0 cellpadding=3>
+ <tr>
+  <td class=rightbold>Enter Voltage :</td>
+  <td><input type=text name=enterVoltage size=10> 
+ </tr>
+ <tr>
+  <td class=rightbold>Enter Pole :</td>
+  <td><input type=text name=enterPole size=10> </td>
+ </tr>
+ <tr>
+  <td class=rightbold>Enter Rpm :</td>
+  <td><input type=text name=enterRpm size=10> RPM</td>
+ </tr>
+ <tr>
+  <td colspan=2 align=center>
+  <input type=button value="Calculate" onclick="calculateTorqueFromPower()">
+  </td>
+  </tr>
+  <td colspan=2 align=center>
+  <input type="reset" value="Reset">
+  </td>
+ </tr>
+ <tr>
+  <td class=rightbold>Output Power :</td>
+  <td><input type=text name=pshaft size=10 readonly=true>
+ </tr>
+  </tr>
+ <tr>
+  <td class=rightbold>Input Current :</td>
+  <td><input type=text name=inputCurrent size=10 readonly=true> 
+ </tr>
+ <tr>
+  <td class=rightbold>Electromechanical Torque :</td>
+  <td><input type=text name=tmech size=10 readonly=true> 
+ </tr>
+</table>
+<table border=0 width=300 cellspacing=0 cellpadding=0>
+<tr>
+ <td align=left valign=bottom><img border=0 height=12 src=/images/bottomleft.gif width=10></td>
+ <td align=center>
+  &nbsp;
+ </td>
+ <td align=right valign=bottom><img border=0 height=12 src=/images/bottomright.gif width=10></td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+<br>
+
+
+ 
+</table>
+<table border=0 width=300 cellspacing=0 cellpadding=0>
+<tr>
+ <td align=left valign=bottom><img border=0 height=12 src=/images/bottomleft.gif width=10></td>
+ <td align=center>
+  &nbsp;
+ </td>
+ <td align=right valign=bottom><img border=0 height=12 src=/images/bottomright.gif width=10></td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+</form>
+
+<!-- End body text -->
+
+  </td>
